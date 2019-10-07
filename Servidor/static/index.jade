@@ -1,0 +1,60 @@
+doctype html
+html(lang="pt")
+    head
+        title Lista de registros
+        link(href='style.css', rel='stylesheet')
+        script(src='scripts.js')
+    body
+        h3 Acessos nas catracas
+        table.stylized-table#access-table
+            tr
+                th(onclick='sortTable(\'access-table\', 0)') Cód.
+                th(onclick='sortTable(\'access-table\', 1)') Nome
+                th(onclick='sortTable(\'access-table\', 2)') CPF
+                th(onclick='sortTable(\'access-table\', 3)') Catraca
+                th(onclick='sortTable(\'access-table\', 4)') Data
+            each item in accesses
+                tr
+                    td= item[0]
+                    td= item[1]
+                    td= item[2]
+                    td= item[3]
+                    td= item[4]
+        | Número de acessos:
+        | #{accesses.length}
+        h3 Registros
+        h4 Adicionar registro
+        form(action='sendRegisters', method='post')
+            table
+                tr
+                    td
+                        | Nome completo
+                    td
+                        input(type='text', name='nome')
+                tr
+                    td
+                        | CPF
+                    td
+                        input(type='text', name='cpf')
+                tr
+                    td Tipo
+                    td
+                        select(name='tipo')
+                            option(value='Aluno') Aluno
+                            option(value='Professor') Professor
+                            option(value='Servidor') Servidor
+                tr
+                    td
+                        input(type='submit', value='Enviar')
+        table.stylized-table#register-table
+            tr
+                th(onclick='sortTable(\'register-table\', 0)') Cód.
+                th(onclick='sortTable(\'register-table\', 1)', width=300) Nome
+                th(onclick='sortTable(\'register-table\', 2)') CPF
+                th(onclick='sortTable(\'register-table\', 3)') Tipo
+            each item in registers
+                tr
+                    td= item['codigo']
+                    td= item['nome']
+                    td= item['cpf']
+                    td= item['tipo']
